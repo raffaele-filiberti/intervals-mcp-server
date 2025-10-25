@@ -2,16 +2,10 @@
 
 startCommand:
   type: stdio
-  commandFunction: |
-    (config) => ({
-      command: 'python',
-      args: ['src/intervals_mcp_server/server.py'],
-      env: {
-        API_KEY: config.apiKey,
-        ATHLETE_ID: config.athleteId,
-        INTERVALS_API_BASE_URL: config.intervalsApiBaseUrl,
-      },
-    })
+  commandFunction:
+    # A JS function that produces the CLI command based on the given config to start the MCP on stdio.
+    |-
+    (config) => ({command: 'python', args: ['src/intervals_mcp_server/server.py'], env: {API_KEY: config.apiKey, ATHLETE_ID: config.athleteId, INTERVALS_API_BASE_URL: config.intervalsApiBaseUrl}})
   configSchema:
     # JSON Schema defining the configuration options for the MCP.
     type: object
