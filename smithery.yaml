@@ -1,6 +1,29 @@
+# Smithery configuration file: https://smithery.ai/docs/build/project-config
+
 runtime: "container"
 build:
   dockerfile: "Dockerfile" # Path to your Dockerfile
   dockerBuildPath: "." # Docker build context
 startCommand:
-  type: "http"
+  type: stdio
+  configSchema:
+    # JSON Schema defining the configuration options for the MCP.
+    type: object
+    required:
+      - apiKey
+      - athleteId
+    properties:
+      apiKey:
+        type: string
+        description: Your Intervals.icu API key
+      athleteId:
+        type: string
+        description: Your Intervals.icu athlete ID (e.g. i12345)
+      intervalsApiBaseUrl:
+        type: string
+        default: https://intervals.icu/api/v1
+        description: Base URL for the Intervals.icu API
+  exampleConfig:
+    apiKey: your_intervals_api_key_here
+    athleteId: i12345
+    intervalsApiBaseUrl: https://intervals.icu/api/v1
